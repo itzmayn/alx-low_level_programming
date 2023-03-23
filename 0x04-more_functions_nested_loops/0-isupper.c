@@ -5,7 +5,7 @@
  *
  * Description: Prints the alphabet with _putchar
  * @c: charater
- * Return- void
+ * Return- int
  */
 
 int _isupper(int c)
