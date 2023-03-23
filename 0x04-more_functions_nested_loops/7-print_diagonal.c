@@ -2,7 +2,6 @@
 
 /**
  * print_diagonal - entry point
- *
  * Description: Prints diagonals
  *@n: number of spaces
  * Return- void
@@ -27,6 +26,7 @@ void print_diagonal(int n)
 				_putchar(' ');
 				}
 			}
+			
 			_putchar('\\');
 			_putchar('\n');
 		}
