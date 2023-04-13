@@ -3,13 +3,15 @@
 #include <stdlib.h>
 
 /**
- * search - search the size
+ * _search - _search the size
  * @s: string
+ * 
  * @n: size of string s2
+ * 
  * @typ: string 1 -> 1, string 2 -> 2
  * Return: size
  */
-unsigned int search(char *s, unsigned int n, int typ)
+unsigned int _search(char *s, unsigned int n, int typ)
 {
     if (s == NULL)
         s = "";
@@ -31,8 +33,8 @@ unsigned int search(char *s, unsigned int n, int typ)
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
     unsigned int i, j, l1, l2;
-    l1 = search(s1, n, 1);
-    l2 = search(s2, n, 2);
+    l1 = _search(s1, n, 1);
+    l2 = _search(s2, n, 2);
     char *newStr = malloc(sizeof(char) * (l1 + l2 + 1));
     if (newStr == NULL)
     {
