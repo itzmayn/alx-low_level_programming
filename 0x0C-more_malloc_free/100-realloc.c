@@ -1,23 +1,18 @@
+#include "main.h"
 #include <stdlib.h>
-
-void theCopy(char *newP, void *ptr, unsigned int new_size)
-{
-    for (unsigned int i = 0; i < new_size; i++)
-    {
-        *((char *)newP + i) = *((char *)ptr + i);
-    }
-}
 
 /**
  * _realloc - realloc but with malloc
  * @ptr: pointer created with malloc
  * @old_size: used space
  * @new_size: is the new size
- * Return: pointer
+ *
+ * Return: pointer to the reallocated memory block, or NULL on failure
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
     void *newP;
+    unsigned int i;
 
     if (ptr == NULL)
         return (malloc(new_size));
@@ -28,10 +23,15 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
         free(ptr);
         return (NULL);
     }
+
     newP = malloc(new_size);
     if (newP == NULL)
         return (NULL);
-    theCopy(newP, ptr, new_size);
+
+    for (i = 0; i < old_size && i < new_size; i++)
+        *((char *)newP + i) = *((char *)ptr + i);
+
     free(ptr);
+
     return (newP);
 }
