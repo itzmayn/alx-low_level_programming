@@ -1,31 +1,29 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
-*_calloc - reserve a memory space
-*@nmemb: scale
-*@size: bytes
-*Return: can return NULL
-*/
-void *_calloc(unsigned int nmemb, unsigned int size)
+ * array_range - creates an array of integers
+ * @min: minimum value
+ * @max: maximum value
+ *
+ * Return: pointer to the newly created array, or NULL on failure
+ */
+int *array_range(int min, int max)
 {
-	char *space;
-	unsigned int pos = 0;
+    int *arr;
+    int i;
 
-	if ((nmemb == 0) || (size == 0))
-		return (NULL);
-	space = malloc(nmemb * size);
-	if ((space != NULL) && (size != 0))
-	{
-		while (pos < (nmemb * size))
-		{
-			space[pos] = 0;
-			pos++;
-		}
-		return (space);
-	}
-	else
-	{
-		return (NULL);
-	}
+    if (min > max)
+        return (NULL);
+
+    arr = malloc(sizeof(int) * (max - min + 1));
+
+    if (arr == NULL)
+        return (NULL);
+
+    for (i = 0; i <= (max - min); i++)
+        arr[i] = min + i;
+
+    return (arr);
 }
