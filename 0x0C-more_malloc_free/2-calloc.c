@@ -1,19 +1,31 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
- * _calloc - reserve a memory space
- * @nmemb: scale
- * @size: bytes
- * Return: Pointer to allocated memory, or NULL if fails
- */
+*_calloc - reserve a memory space
+*@nmemb: scale
+*@size: bytes
+*Return: can return NULL
+*/
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	if (nmemb == 0 || size == 0)
-		return NULL;
+	char *space;
+	unsigned int pos = 0;
 
-	void *space = malloc(nmemb * size);
-	if (space)
-		memset(space, 0, nmemb * size);
-
-	return space;
+	if ((nmemb == 0) || (size == 0))
+		return (NULL);
+	space = malloc(nmemb * size);
+	if ((space != NULL) && (size != 0))
+	{
+		while (pos < (nmemb * size))
+		{
+			space[pos] = 0;
+			pos++;
+		}
+		return (space);
+	}
+	else
+	{
+		return (NULL);
+	}
 }
