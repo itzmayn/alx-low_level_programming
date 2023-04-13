@@ -1,4 +1,8 @@
 #include "main.h"
+#include <stdlib.h>
+#include <limits.h>
+#include <stdio.h>
+#include <string.h>
 
 /**
  * multiplies - multiplies two positive numbers represented as strings
