@@ -3,48 +3,44 @@
 #include <stdlib.h>
 
 /**
- * _search - _search the size
- * @s: string
- * 
- * @n: size of string s2
- * 
- * @typ: string 1 -> 1, string 2 -> 2
- * Return: size
- */
-unsigned int _search(char *s, unsigned int n, int typ)
-{
-    if (s == NULL)
-        s = "";
-    unsigned int l;
-    for (l = 0; s[l] != '\0'; l++)
-        ;
-    if (n < l && typ == 2)
-        l = l - (l - n);
-    return (l);
-}
-
-/**
- * string_nconcat - concatenate 2 string with limit
- * @s1: string
- * @s2: string
- * @n: size of string s2
- * Return: pointer
+ * string_nconcat - concatenate two strings with a limit
+ * @s1: string 1
+ * @s2: string 2
+ * @n: number of bytes from s2 to concatenate
+ *
+ * Return: pointer to newly allocated memory with concatenated string,
+ *         or NULL on failure
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-    unsigned int i, j, l1, l2;
-    l1 = _search(s1, n, 1);
-    l2 = _search(s2, n, 2);
-    char *newStr = malloc(sizeof(char) * (l1 + l2 + 1));
-    if (newStr == NULL)
-    {
-        free(newStr);
+    unsigned int i, j, len1, len2;
+    char *concatenated;
+
+    if (s1 == NULL)
+        s1 = "";
+    if (s2 == NULL)
+        s2 = "";
+
+    for (len1 = 0; s1[len1] != '\0'; len1++)
+        ;
+    for (len2 = 0; s2[len2] != '\0'; len2++)
+        ;
+
+    if (n >= len2)
+        n = len2;
+
+    concatenated = malloc(sizeof(char) * (len1 + n + 1));
+
+    if (concatenated == NULL)
         return (NULL);
-    }
-    for (i = 0; i < l1; i++)
-        newStr[i] = s1[i];
-    for (j = 0; j < l2; j++, i++)
-        newStr[i] = s2[j];
-    newStr[i] = '\0';
-    return (newStr);
+
+    for (i = 0; i < len1; i++)
+        concatenated[i] = s1[i];
+
+    for (j = 0; j < n; j++, i++)
+        concatenated[i] = s2[j];
+
+    concatenated[i] = '\0';
+
+    return (concatenated);
 }
