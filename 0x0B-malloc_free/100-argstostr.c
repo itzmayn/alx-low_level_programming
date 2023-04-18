@@ -1,12 +1,13 @@
 #include "main.h"
 
 /**
-* argstostr - concatenates all the arguments of your program
-* @ac: count of args passed to the function
-* @av: array of arguments
-*
-* Return: pointer to the new string
-*/
+ * argstostr - Concatenates all the arguments of your program.
+ *
+ * @ac: Count of args passed to the function.
+ * @av: Array of arguments.
+ *
+ * Return: Pointer to the new string.
+ */
 char *argstostr(int ac, char **av)
 {
 	if (ac == 0 || av == NULL)
@@ -35,12 +36,12 @@ char *argstostr(int ac, char **av)
 		int len = 0;
 		while (av[i][len] != '\0')
 		{
-			new_string[index++] = av[i][len++];
+			new_string[index++] = av[i][len++]; /* copy character to new_string */
 		}
-		new_string[index++] = '\n';
+		new_string[index++] = '\n'; /* add newline character */
 	}
 
-	new_string[index] = '\0';
+	new_string[index] = '\0'; /* null-terminate the new_string */
 
 	return (new_string);
 }
