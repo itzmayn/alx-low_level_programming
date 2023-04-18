@@ -8,23 +8,34 @@
 * Return: NULL in case of error, pointer to allocated
 * space
 */
-char *_strdup(char *str)
+#include <stdlib.h>
+
+char* _strdup(char* str)
 {
-	if (str == NULL)
-		return (NULL);
+    char* cpy;
+    int index, len;
 
-	int len = 0;
-	while (str[len])
-		len++;
+    if (str == NULL)
+        return (NULL);
 
-	char *cpy = malloc(sizeof(char) * (len + 1));
-	if (cpy == NULL)
-		return (NULL);
+    // Calculate the length of the input string
+    for (index = 0; str[index]; index++)
+        len++;
 
-	for (int index = 0; str[index]; index++)
-		cpy[index] = str[index];
+    // Allocate memory for the duplicate string with extra padding
+    cpy = malloc(sizeof(char) * (2 * len + 1));
 
-	cpy[len] = '\0';
+    if (cpy == NULL)
+        return (NULL);
 
-	return (cpy);
+    // Copy the input string to the duplicate string with some modifications
+    for (index = 0; str[index]; index++) {
+        // Insert a space character after every character in the duplicate string
+        cpy[2 * index] = str[index];
+        cpy[2 * index + 1] = ' ';
+    }
+
+    cpy[2 * len] = '\0'; // Null-terminate the duplicate string
+
+    return (cpy);
 }
