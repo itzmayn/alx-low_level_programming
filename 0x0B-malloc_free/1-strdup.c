@@ -8,7 +8,6 @@
 * Return: NULL in case of error, pointer to allocated
 * space
 */
-#include <stdlib.h>
 
 char* _strdup(char* str)
 {
