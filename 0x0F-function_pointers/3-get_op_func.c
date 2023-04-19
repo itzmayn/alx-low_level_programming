@@ -1,29 +1,31 @@
-#include "function_pointers.h"
+#include "3-calc.h"
+#include <stdlib.h>
 
 /**
- * int_index - Searches for an integer in an array using a comparison function.
- *
- * @array: The array containing the elements.
- * @size: The number of elements in the array.
- * @cmp: The function to compare values.
- *
- * Return: The index of the first corresponding element or -1 if no element matches.
- */
-int int_index(int *array, int size, int (*cmp)(int))
+*get_op_func - selects the correct function to perform
+*the operation asked by the user. You’re not allowed
+*to declare any other function.
+*@s: operator passed as argument
+*
+*Return: A pointer to the function corresponding to
+*the operator given in parameter
+*/
+int (*get_op_func(char *s))(int, int)
 {
-    int index = 0;
 
-    /* Check if array and function pointer are not NULL */
-    if (array == NULL || cmp == NULL)
-        return (-1);
+op_t ops[] = {
+{"+", op_add},
+{"-", op_sub},
+{"*", op_mul},
+{"/", op_div},
+{"%", op_mod},
+{NULL, NULL}
+};
+int i = 0;
 
-    /* Iterate through the array and compare values using the function pointer */
-    for (; index < size; index++)
-    {
-        if (cmp(array[index]) != 0)
-            return (index);
-    }
+while (ops[i].op != NULL && *(ops[i].op) != *s)
+i++;
 
-    /* Return -1 if no element matches */
-    return (-1);
+return (ops[i].f);
+
 }
