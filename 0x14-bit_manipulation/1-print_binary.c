@@ -1,50 +1,34 @@
 #include "main.h"
 
 /**
- * print_binary - Prints the binary representation of a number.
+ * print_binary - prints the binary representation of a number
+ * @n: unsigned long int
  *
- * @n: The number to be printed.
+ * Description: Prints the binary representation of an unsigned long int
+ * starting from the most significant bit to the least significant bit
+ * using the `_putchar` function to output each character.
+ * Return: void
  */
 void print_binary(unsigned long int n)
 {
-	/* Get the size of the number in bits. */
-	signed long int size = sizeof(n) * 8 - 1;
+	unsigned long int mask = 1UL << (sizeof(unsigned long int) * 8 - 1);
+	int found_first_one = 0;
 
-	/* Check if the number is zero or one. */
 	if (n == 0)
 	{
-		putchar('0');
-		return;
-	}
-	else if (n == 1)
-	{
-		putchar('1');
+		_putchar('0');
 		return;
 	}
 
-	/* Flag to indicate if a one has been found. */
-	int flag = 0;
-
-	/* Loop through each bit of the number, starting with the most significant bit. */
-	while (size >= 0)
+	while (mask > 0)
 	{
-		/* Get the value of the current bit (0 or 1). */
-		char c = (n >> size) & 1;
-
-		/* If a one has been found, print the current bit. */
-		if (flag == 1)
-			putchar(c + '0');
-		/* Otherwise, if the current bit is one, print it and set the flag. */
-		else
+		if ((n & mask) == 0 && found_first_one)
+			_putchar('0');
+		else if ((n & mask) != 0)
 		{
-			if (c == 1)
-			{
-				putchar(c + '0');
-				flag = 1;
-			}
+			_putchar('1');
+			found_first_one = 1;
 		}
-
-		/* Move on to the next bit. */
-		size--;
+		mask >>= 1;
 	}
 }
